@@ -2,17 +2,17 @@ module GraphDS
 
 using DataFrames
 using Graphs
-using Parquet2
 using CodecZlib
 using Revise
 
-include("GraphDB.jl")
+include("GraphDataSet.jl")
 include("compression/inclusions.jl")
 include("graph_generation/graph_gen.jl")
 
+export GraphDataSet, GraphDSDF
 
-export graph_to_df, graph_cols_to_df, chars_to_df, greet, get_generators, test_graph_generator, generate_graphs, graph_db_to_df, df_to_chars, parquet_size, parquet_ratio
+export get_generators, test_graph_generator, generate_graphs
 
-export create_default_names, GraphDB, write_to_file, generate_file_string, graph_to_string, reverse_names_dict, write_own_version_to_file
+export create_default_names, write_to_file, generate_file_string, graph_to_string, write_own_version_to_file, create_default_string
 
 end # module GraphCompress

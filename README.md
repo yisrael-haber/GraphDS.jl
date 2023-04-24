@@ -4,3 +4,6 @@ This is a julia package to be used for generating datasets/databases of graphs f
 # TODO:
 
     - Add more detailed documentation and examples. 
+
+    - Figure what the hell the schemas should be, and make everything else work with it in a nice well-synchronized 
+    fashion. 

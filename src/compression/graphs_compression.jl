@@ -1,19 +1,27 @@
-function create_default_names(g_db::Vector{Graphs.SimpleGraphs.SimpleGraph{Int64}})
-    Dict( "PURE $i" => g_db[i] for i in eachindex(g_db))
+function create_default_indices(g_db::Vector{SimpleGraph{Int64}})
+    Dict( i => g_db[i] for i in eachindex(g_db))
 end
 
-function graph_to_string(graph::SimpleGraph, name::String)
-    graph_string = "$(name)-$(nv(graph))-$(ne(graph))"
+function create_default_string(graph::SimpleGraph, index::Int64)
+    graph_string = "PURE-$(index)-$(nv(graph))-$(ne(graph)) "
     edges_string = map(x->",$(src(x)),$(dst(x))", edges(graph)) |> join
     graph_string * edges_string * "\n"
 end
 
-function generate_file_string(g_db::GraphDB)
-    reverse_dict_mapping = reverse_names_dict(g_db)
-    map(x->graph_to_string(x, reverse_dict_mapping[x]), g_db.DB) |> join
+#=
+function graph_to_string(graph::SimpleGraph, index::Int64, purity::Bool)
+    graph_string = "$(index)-$(purity)-$(nv(graph))-$(ne(graph)) "
+    edges_string = map(x->",$(src(x)),$(dst(x))", edges(graph)) |> join
+    graph_string * edges_string * "\n"
+end
+=#
+
+function generate_file_string(g_ds::GraphDataSet)
+    graph_to_index = reverse_index_dict(g_ds)
+    map(x->graph_to_string(x, graph_to_index[x], g_ds.purity[graph_to_index[x]]), g_ds.DB) |> join
 end
 
-function write_own_version_to_file(g_db::GraphDB, file_name)
+function write_own_version_to_file(g_db::GraphDataSet, file_name)
     text = g_db |> generate_file_string 
     compressed = transcode(GzipCompressor, Vector{UInt8}(text))
     open(file_name, "w") do io
@@ -21,7 +29,7 @@ function write_own_version_to_file(g_db::GraphDB, file_name)
     end;
 end
 
-function write_to_file(gdb::GraphDB, file_name::String)
+function write_to_file(gdb::GraphDataSet, file_name::String)
     open(file_name, "w") do io
         Graphs.savelg_mult(io, gdb.names)
     end;
