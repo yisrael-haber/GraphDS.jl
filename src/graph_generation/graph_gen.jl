@@ -17,5 +17,5 @@ function generate_graphs(num_to_gen::Int64, generator::String, params...)
 
     gen_func = Symbol(generator)
     
-    graph_db = [@eval $(gen_func)($(params...)) for i ∈ 1:num_to_gen]
+    graph_ds = [@eval $(gen_func)($(params...)) for i ∈ 1:num_to_gen]
 end

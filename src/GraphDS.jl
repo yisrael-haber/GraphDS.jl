@@ -13,6 +13,8 @@ export GraphDataSet, GraphDSDF
 
 export get_generators, test_graph_generator, generate_graphs
 
-export create_default_names, write_to_file, generate_file_string, graph_to_string, write_own_version_to_file, create_default_string
+export write_to_file, generate_file_string, read_from_file
+
+export create_default_names,  create_default_string, create_graph_string
 
 end # module GraphCompress

@@ -1,20 +1,18 @@
-#=
-function generate_file_string(g_ds::GraphDataSet)
-    graph_to_index = reverse_index_dict(g_ds)
-    map(x->graph_to_string(x, graph_to_index[x], g_ds.purity[graph_to_index[x]]), g_ds.DB) |> join
+src_and_dst_string(edge::Edge) = ",$(src(edge)),$(dst(edge))"
+
+function create_graph_string(graph::SimpleGraph, index::Int64, graph_prefix::String)
+    graph_prefix * (edges_string = map(x->src_and_dst_string(x), edges(graph)) |> join) * "\n"
 end
+
+function generate_file_string(g_ds::GraphDataSet)
+    [(create_graph_string(g_ds.DB[id], id, g_ds.graph_prefix[id])) for id in keys(g_ds.index)] |> join
+end
+
+gzip(str::String) = transcode(GzipCompressor, Vector{UInt8}(str))
 
 function write_own_version_to_file(g_db::GraphDataSet, file_name)
-    text = g_db |> generate_file_string 
-    compressed = transcode(GzipCompressor, Vector{UInt8}(text))
+    compressed_graph_ds_string = g_db |> generate_file_string |> gzip
     open(file_name, "w") do io
-        write(io, compressed)
+        write(io, compressed_graph_ds_string)
     end;
 end
-
-function write_to_file(gdb::GraphDataSet, file_name::String)
-    open(file_name, "w") do io
-        Graphs.savelg_mult(io, gdb.names)
-    end;
-end
-=#
