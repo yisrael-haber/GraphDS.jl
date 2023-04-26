@@ -1,4 +1,4 @@
-include("../graph_generation/valid_graph_generators.jl")
+include("valid_graph_generators.jl")
 
 function test_graph_generator(generator::String, params...)
     if (generator ∉ get_generators()) throw(ErrorException("Generator not in valid list of generators")) end
