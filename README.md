@@ -11,6 +11,14 @@ Lastly, the final additional component for now deals with io related to these da
 ## Anomaly Detection
 As stated in the second issue above, there is a lack in libraries that support datasets regarding dealing with anomaly detection in graphs. One of these issues comes from the fact that anomalies, as the name suggest, need to be generated. This means that we first need a dataset of "standard" graphs that don't have clear anomalies, you then need to have a method of injecting these anomalies into your graphs - and you need to document these changes in a controlled manner. The basis for supplying an API for this is in this package, and will most likely be a significant part of the future of this package. 
 
+## Installation
+Currently the package is not officially registered with the Julia organization and therefore cannot be installed directly with the name of the package. Instead you would first type "]" in the Julia terminal and enter into the console
+
+'''console
+pkg> add https://github.com/yisrael-haber/GraphDS.jl
+'''
+
+It will install the package and all of it's dependencies accordingly. 
 
 # TODO:
 
