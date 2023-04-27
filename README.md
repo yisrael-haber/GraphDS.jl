@@ -3,6 +3,10 @@
 - There is also a need for clear and transparent Dataset generation for the purpose of ML algorithms on graphs such as anomaly detection problems. This lack of clarity causes many issues, including but not limited to unclear code/purposely chosen collections of graphs in a malicious manner. 
 
 Both of these needs inspired the following Julia package. The first component of this module is the engine for generating the graph dataset according to a valid chosen generator, as determined by the 'Graphs.jl' package, and the specified number of graphs to be generated. The next component deals with the generating a well-suited API to deal with the dataset of graphs. 
+Lastly, the final additional component for now deals with io related to these datasets - supplying custom serialization/deserialization of the dataset of graphs to/from a gzipped file string. All together these give solutions to managably small problems that deal with graph datasets. 
+
+
+As stated in the second issue above, there is a lack in libraries that support datasets regarding dealing with anomaly detection in graphs. One of these issues comes from the fact that anomalies, as the name suggest, need to be generated. This means that we first need a dataset of "standard" graphs that don't have clear anomalies, you then need to have a method of injecting these anomalies into your graphs - and you need to document these changes in a controlled manner. 
 
 
 # TODO:
