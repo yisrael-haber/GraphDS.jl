@@ -1,5 +1,9 @@
-# rgdbg.jl
-This is a julia package to be used for generating datasets/databases of graphs for general use purpose, for example in ML. The acronym stands for "Random Graph DataBase Generator". This should lead to an eventual additional package for creating DBs of random graphs that should allow for running/training anomally detection algorithms on.
+# GraphDS.jl
+- There seems to be a lack of a simple-interfaced engine that can easily and efficiently generate datasets of graphs. This is important for testing algorithms on a wide collection of graphs tailored to the specification of the researcher (up to a reasonable point.) 
+- There is also a need for clear and transparent Dataset generation for the purpose of ML algorithms on graphs such as anomaly detection problems. This lack of clarity causes many issues, including but not limited to unclear code/purposely chosen collections of graphs in a malicious manner. 
+
+Both of these needs inspired the following Julia package. The first component of this module is the engine for generating the graph dataset according to a valid chosen generator, as determined by the 'Graphs.jl' package, and the specified number of graphs to be generated. The next component deals with the generating a well-suited API to deal with the dataset of graphs. 
+
 
 # TODO:
 
