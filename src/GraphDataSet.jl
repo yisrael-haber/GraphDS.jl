@@ -6,7 +6,7 @@ struct GraphDataSet
     function GraphDataSet(DB::Vector{SimpleGraph{Int64}})
         index = create_default_indices(DB)
         graph_to_index = Dict( y=>x for (x, y) in index)
-        graph_prefix = Dict( graph_to_index[x]=>graph_string_prefix(x, graph_to_index[x]) for x in DB)
+        graph_prefix = Dict( graph_to_index[x]=>default_graph_prefix(x, graph_to_index[x]) for x in DB)
         new(DB, index, graph_prefix)
     end
 
@@ -15,11 +15,9 @@ struct GraphDataSet
     end
 end
 
-reverse_index_dict(g_db::GraphDataSet) = Dict( y=>x for (x, y) in g_db.index)
-
 create_default_indices(g_db::Vector{SimpleGraph{Int64}}) = Dict( i => g_db[i] for i in eachindex(g_db))
 
-graph_string_prefix(graph::SimpleGraph, index::Int64) = "PURE-$(index)-$(nv(graph))-$(ne(graph))"
+default_graph_prefix(graph::SimpleGraph, index::Int64) = "PURE-$(index)-$(nv(graph))-$(ne(graph))"
 
 struct GraphDSDF 
     DF::DataFrame

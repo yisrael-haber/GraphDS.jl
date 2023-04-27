@@ -22,9 +22,10 @@ It will install the package and all of it's dependencies accordingly.
 
 # TODO:
 
-    - Add more detailed documentation and examples. '''THIS IS ESSENTIAL'''
+    - [] Add more detailed documentation and examples.
 
-    - Figure what the hell the schemas should be, and make everything else work with it in a nice well-synchronized 
+    - [] Figure what the hell the schemas should be, and make everything else work with it in a nice well-synchronized 
     fashion. '''THIS IS MOSTLY SOLVED. STILL NEED TO THINK OF SCHEMA FOR ANOMALIES - WILL DECIDE ON THIS LATER.'''
 
+    - [] Add important 'Base.' operations to the module to create a friendlier and more usable interface.
     - Add important 'Base.' operations to the module to create a friendlier and more usable interface.
