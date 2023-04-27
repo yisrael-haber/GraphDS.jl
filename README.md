@@ -14,9 +14,9 @@ As stated in the second issue above, there is a lack in libraries that support d
 ## Installation
 Currently the package is not officially registered with the Julia organization and therefore cannot be installed directly with the name of the package. Instead you would first type "]" in the Julia terminal and enter into the console
 
-'''console
+```console
 pkg> add https://github.com/yisrael-haber/GraphDS.jl
-'''
+```
 
 It will install the package and all of it's dependencies accordingly. 
 
