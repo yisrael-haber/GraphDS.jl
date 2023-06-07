@@ -1,17 +1,28 @@
-struct GraphDataSet
-    DB::Vector{SimpleGraph{Int64}}
-    index::Dict{Int64, SimpleGraph}
-    graph_prefix::Dict{Int64, String}
-
-    function GraphDataSet(DB::Vector{SimpleGraph{Int64}})
-        index = create_default_indices(DB)
-        graph_to_index = Dict( y=>x for (x, y) in index)
-        graph_prefix = Dict( graph_to_index[x]=>default_graph_prefix(x, graph_to_index[x]) for x in DB)
-        new(DB, index, graph_prefix)
+struct AnomalyGraph 
+    graph::SimpleGraph 
+    index::Int64 
+    graph_prefix::String 
+    
+    function AnomalyGraph(graph, index, graph_prefix)
+        new(graph, index, graph_prefix)
     end
+end
 
-    function GraphDataSet(DB::Vector{SimpleGraph{Int64}}, index::Dict{Int64, SimpleGraph{Int64}}, graph_prefix::Dict{Int64, String})
-        new(DB, index, graph_prefix)
+struct AnomalyGraphs 
+    DataSet::Vector{AnomalyGraph}
+    indexing::Dict{Int64, SimpleGraph}
+    graph_prefixes::Dict{Int64, String}
+    flunksity
+
+    function AnomalyGraphs(Dataset::Vector{AnomalyGraphs})
+        indexing = Dict{Int64, String}()
+        graph_prefixes = Dict{Int64, SimpleGraph}
+
+        for anomGraph in Dataset 
+            indexing[anomGraph.index] = anomGraph
+            graph_prefixes[anomGraph.index] = prefix
+        end
+        new(DataSet, indexing, graph_prefixes)
     end
 end
 
@@ -19,10 +30,10 @@ create_default_indices(g_db::Vector{SimpleGraph{Int64}}) = Dict( i => g_db[i] fo
 
 default_graph_prefix(graph::SimpleGraph, index::Int64) = "PURE-$(index)-$(nv(graph))-$(ne(graph))"
 
-struct GraphDSDF 
+struct AnomalyGraphsDF
     DF::DataFrame
 
-    function GraphDSDF(g_ds::GraphDataSet)
+    function AnomalyGraphsDSDF(g_ds::AnomalyGraphs)
         rows = [[index, g_ds.graph_prefix[index], g_ds.DB[index]] for index in keys(g_ds.index)]
         columns = [[rows[i][col] for i in eachindex(rows)] for col in eachindex(rows[1])]
         new(DataFrame(columns, [:index, :graph_prefix, :graph]))

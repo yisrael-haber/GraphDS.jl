@@ -1,4 +1,4 @@
-module GraphDS
+module AnomalyGraphs
 
 using DataFrames
 using Graphs
@@ -17,4 +17,4 @@ export write_to_file, generate_file_string, read_from_file
 
 export default_graph_prefix, create_graph_string, create_default_indices
 
-end # module GraphDS
+end 

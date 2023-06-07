@@ -37,6 +37,6 @@ function read_from_file(file_name::String)
         index_dict = Dict( indices[i]=>graphs[i] for i in eachindex(indices))
         prefix_dict = Dict( indices[i]=>prefixes[i] for i in eachindex(indices))
         
-        return GraphDataSet(graphs, index_dict, prefix_dict)
+        return AnomalyGraphs(graphs, index_dict, prefix_dict)
     end;
 end
